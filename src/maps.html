@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenStreetMap avec Points d'Intérêt</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <title>OpenLayers avec Points d'Intérêt</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.2.2/ol.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,23 +53,38 @@
         .active {
             background-color: #d0e7ff; /* Couleur de surbrillance pour le point actif */
         }
+
+        .point-marker {
+            background-color: #007bff;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+        }
     </style>
 </head>
 <body>
-    <h1>Ma carte OpenStreetMap avec des points d'intérêt</h1>
+    <h1>Ma carte OpenLayers avec des points d'intérêt</h1>
     <div id="sidebar"></div>
     <div id="map"></div>
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.2.2/dist/ol.js"></script>
     <script>
-        // Initialise la carte
-        const map = L.map('map').setView([48.8566, 2.3522], 10);
-
-        // Ajoute une couche de carte
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+        // Initialisation de la carte avec OpenLayers
+        const map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'https://{a-d}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+                        attributions: '© OpenStreetMap contributors, © CartoDB'
+                    })
+                })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([2.3522, 48.8566]), // Paris, France
+                zoom: 10
+            })
+        });
 
         // Points d'intérêt avec informations détaillées
         const points = [
@@ -102,25 +117,39 @@
         // Fonction pour afficher le contenu dans le volet latéral
         function showPointInfo(point) {
             const sidebar = document.getElementById('sidebar');
-            sidebar.innerHTML += `
+            sidebar.innerHTML = `
                 <h3>${point.title}</h3>
                 <p><strong>Adresse :</strong> ${point.address}</p>
                 <p>${point.description}</p>
                 <img src="${point.image}" alt="${point.title}">
                 <hr>
             `;
-            map.setView([point.lat, point.lng], 14); // Centrer la carte sur le point
         }
 
-        // Ajoute les marqueurs sur la carte et dans le volet
-        points.forEach(point => {
-            // Ajoute le marqueur sur la carte
-            const marker = L.marker([point.lat, point.lng]).addTo(map);
+        // Fonction pour zoomer sur un point d'intérêt
+        function zoomToPoint(lng, lat) {
+            map.getView().animate({
+                center: ol.proj.fromLonLat([lng, lat]),
+                duration: 1000, // 1 seconde d'animation
+                zoom: 14
+            });
+        }
 
-            // Événement pour afficher les informations au clic sur le marqueur
-            marker.on('click', () => {
+        // Ajout des points d'intérêt sur la carte avec OpenLayers
+        points.forEach(point => {
+            const marker = new ol.Overlay({
+                position: ol.proj.fromLonLat([point.lng, point.lat]),
+                positioning: 'center-center',
+                element: document.createElement('div'),
+                stopEvent: false
+            });
+            marker.getElement().className = 'point-marker';
+            map.addOverlay(marker);
+
+            // Événement au clic sur le marqueur
+            marker.getElement().addEventListener('click', () => {
                 showPointInfo(point);
-                highlightPoint(point.title); // Mettre en surbrillance le point actif
+                zoomToPoint(point.lng, point.lat); // Zoom sur le point d'intérêt
             });
 
             // Crée l'élément dans le volet latéral
@@ -129,22 +158,10 @@
             pointDiv.innerHTML = `<strong>${point.title}</strong>`;
             pointDiv.onclick = () => {
                 showPointInfo(point);
-                highlightPoint(point.title); // Mettre en surbrillance le point actif
+                zoomToPoint(point.lng, point.lat); // Zoomer sur le point d'intérêt en cliquant dans le volet
             };
-            sidebar.appendChild(pointDiv);
+            document.getElementById('sidebar').appendChild(pointDiv);
         });
-
-        // Fonction pour mettre en surbrillance le point actif
-        function highlightPoint(activeTitle) {
-            const pointsDivs = document.querySelectorAll('.point');
-            pointsDivs.forEach(div => {
-                if (div.innerText.includes(activeTitle)) {
-                    div.classList.add('active');
-                } else {
-                    div.classList.remove('active');
-                }
-            });
-        }
     </script>
 </body>
 </html>
