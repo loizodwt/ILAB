@@ -1,2 +1,14 @@
 @import 'utils/variables';
 @import 'components/type';
+@import 'components/fonts';
+@import 'components/gradient';
+
+
+
+$rose: #D60081;
+$bleu: #267797;
+
+body {
+  font-family: 'ClashDisplay';
+
+}
