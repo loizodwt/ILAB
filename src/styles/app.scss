@@ -1,6 +1,6 @@
 @import 'utils/variables';
 @import 'components/fonts';
-@import 'components/gradient';
+/*@import 'components/gradient';*/
 @import 'components/page1';
 
 :root {
@@ -17,6 +17,7 @@ body {
 
 h1{
   font-size: $size-title;
-  
+  text-transform: uppercase;
+
 }
 
