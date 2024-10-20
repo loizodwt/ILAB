@@ -17,6 +17,15 @@ body {
 
 }
 
+section {
+  height: 100vh;
+  display: flex;
+  & div{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 h1{
   font-size: $size-title;
   text-transform: uppercase;
@@ -32,12 +41,21 @@ h2{
 h3{
   font-size: $size-h3;
   margin: 0;
+  text-transform: uppercase;
 }
 
 h4{
   font-size: $size-h4;
   margin: 0;
 }
+
+button{
+  font-size: $size-title;
+  font-family: 'ClashDisplay';
+  border: none;
+  background-color: transparent;
+}
+
 .number{
 
   font-family: 'ClashDisplay';
