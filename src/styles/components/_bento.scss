@@ -24,13 +24,13 @@
         border: none;
         text-transform: uppercase;
     }
-
+ 
     &__block:nth-child(1){width: 20%;
-        background-color: aqua;
+        background-color: $c-bento-rose;
     }&__block:nth-child(2){width: 20%;
-        background-color: chartreuse;
+        background-color: $c-bento-fushia;
     }&__block:nth-child(3){width: 60%;
-        background-color: green;
+        background-color: $c-bento-mauve;
     }
 
     
@@ -58,7 +58,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      gap: 36px;  // Ajout de l'espacement entre les éléments
+      gap: 32px;  // Ajout de l'espacement entre les éléments
     }
   
     &--item {
