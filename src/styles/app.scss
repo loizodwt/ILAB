@@ -3,6 +3,7 @@
 /*@import 'components/gradient';*/
 @import 'components/page1';
 @import 'components/bento';
+@import 'components/keyframes';
 
 :root {
     --rose: #D60081;
@@ -10,21 +11,21 @@
     --bg: #ffffff; 
   }
   
+  * {
+    box-sizing: border-box;
+  }
 
 body {
   font-family: 'ClashDisplay';
   margin: 0;
   padding: 0;
+  overflow: hidden;
 
 }
 
 section {
   height: 100vh;
   display: flex;
-  & div{
-    display: flex;
-    flex-direction: column;
-  }
 }
 
 h1{
@@ -62,7 +63,7 @@ a{
   color: $c-text;
   font-size: $size-h4;
   border: solid 4px black;
-  padding: 20px 24px;
+  margin: 0;
   font-family: 'ClashDisplay';
   font-weight: bolder;
   text-decoration: none;
