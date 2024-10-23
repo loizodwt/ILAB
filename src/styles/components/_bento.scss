@@ -35,9 +35,7 @@
 
     
 }
-
 .menu {
-  
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,13 +45,12 @@
     position: relative;
     z-index: 1;
     height: 100%;
-    
+  
     &.is-dragging {
       cursor: grabbing;
     }
-    
+  
     &--wrapper {
-      counter-reset: count;
       display: flex;
       position: absolute;
       z-index: 1;
@@ -61,27 +58,24 @@
       top: 0;
       left: 0;
       width: 100%;
+      gap: 36px;  // Ajout de l'espacement entre les éléments
     }
-    
+  
     &--item {
-      counter-increment: count;
+      width: 30vw;  // Taille de l'élément
+      height: 100%;
+      padding: 0 1.5vw;
+      border: solid 1px black;
+      border-radius: 35px;
+      flex-shrink: 0;  // Empêche la réduction automatique des éléments
       position: absolute;
       z-index: 1;
       top: 0;
       left: 0;
-      width: 30vw;
-      height: 100%;
-      padding: 0 1.5vw;
-      overflow: hidden;
-      border: solid 1px black;
-      border-radius: 35px;
-      
-      
+  
       &:nth-child(n+10):before {
         content: counter(count);
       }
-      
-      
     }
   }
   
