@@ -3,6 +3,7 @@
 /*@import 'components/gradient';*/
 @import 'components/page1';
 @import 'components/bento';
+@import 'components/maps';
 @import 'components/keyframes';
 
 :root {
@@ -62,10 +63,8 @@ button{
 a{
   color: $c-text;
   font-size: $size-h4;
-  border: solid 4px black;
   margin: 0;
   font-family: 'ClashDisplay';
-  font-weight: bolder;
   text-decoration: none;
 }
 

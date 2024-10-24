@@ -4,42 +4,63 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 gsap.registerPlugin(ScrollToPlugin);
 
-/*--------------------
-Vars
---------------------*/
+
+document.addEventListener("DOMContentLoaded", function () {
+  const path = window.location.pathname; 
+
+  if (path.includes("bento.html")) {
+      initBento();
+  }
+  else if (path.includes("index.html")) {
+      initIndex();
+  }
+  else if (path.includes("maps.html")) {
+      initMap();
+  }
+
+  function initIndex() {
+    document.querySelector(".button--next").addEventListener("click", function() {
+      gsap.to(window, {
+        duration: 1,
+        scrollTo: { y: ".section2", offsetY: 50 },  
+        ease: "power2.inOut"
+      });
+    });
+    
+  }
+
+  function initBento() {
+    //Vars
 const $menu = document.querySelector(".menu");
 const $items = document.querySelectorAll(".menu--item");
 const $images = document.querySelectorAll(".menu--item img");
 
 let menuWidth = $menu.clientWidth;
 let itemWidth = $items[0].clientWidth;
-const itemSpacing = 36;  // Ajout de l'espacement
-let wrapWidth = $items.length * (itemWidth + itemSpacing);  // Prise en compte de l'espacement
+const itemSpacing = 36; 
+let wrapWidth = $items.length * (itemWidth + itemSpacing); 
 
 let scrollSpeed = 0;
 let oldScrollY = 0;
 let scrollY = 0;
 let y = 0;
 
-/*--------------------
-Lerp
---------------------*/
+//Lerp
 const lerp = (v0, v1, t) => {
   return v0 * (1 - t) + v1 * t;
 };
 
-/*--------------------
-Dispose
---------------------*/
+
+//Dispose
 const dispose = (scroll) => {
   gsap.set($items, {
     x: (i) => {
-      return i * (itemWidth + itemSpacing) + scroll;  // Prise en compte de l'espacement dans la position des items
+      return i * (itemWidth + itemSpacing) + scroll; 
     },
     modifiers: {
       x: (x, target) => {
         const s = gsap.utils.wrap(
-          -itemWidth - itemSpacing,  // Ajout de l'espacement dans le wrap
+          -itemWidth - itemSpacing,  
           wrapWidth - itemWidth,
           parseInt(x)
         );
@@ -50,16 +71,13 @@ const dispose = (scroll) => {
 };
 dispose(0);
 
-/*--------------------
-Wheel
---------------------*/
+
+//Wheel
 const handleMouseWheel = (e) => {
   scrollY -= e.deltaY * 0.9;
 };
 
-/*--------------------
-Touch
---------------------*/
+//Touch
 let touchStart = 0;
 let touchX = 0;
 let isDragging = false;
@@ -79,9 +97,7 @@ const handleTouchEnd = () => {
   $menu.classList.remove("is-dragging");
 };
 
-/*--------------------
-Listeners
---------------------*/
+//Listeners
 $menu.addEventListener("wheel", handleMouseWheel);
 
 $menu.addEventListener("touchstart", handleTouchStart);
@@ -97,19 +113,16 @@ $menu.addEventListener("selectstart", () => {
   return false;
 });
 
-/*--------------------
-Resize
---------------------*/
+//Resize
 window.addEventListener("resize", () => {
   menuWidth = $menu.clientWidth;
   itemWidth = $items[0].clientWidth;
-  wrapWidth = $items.length * (itemWidth + itemSpacing);  // Recalcule la largeur totale en fonction du redimensionnement
+  wrapWidth = $items.length * (itemWidth + itemSpacing); 
 });
 
 
-/*--------------------
-Render
---------------------*/
+
+//Render
 const autoScrollSpeed = 0.3;
 
 const render = () => {
@@ -131,5 +144,22 @@ const render = () => {
   });
 };
 render();
+  }
+
+  function initMap() {
+    //initialtion
+      var map = L.map('map').setView([50.4674, 4.8719], 13);
+
+      //Layer
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          maxZoom: 20
+      }).addTo(map);
+
+      // marks
+  }
+});
+
+
 
 
