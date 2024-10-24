@@ -2,7 +2,7 @@
 
 .bento{
     height: 100vh;
-    padding: 36px;
+    padding: 36px 0px;
     overflow-y: hidden;
     display: flex;
     flex-direction: column;
@@ -13,6 +13,7 @@
         box-sizing: border-box;
         max-height: 350px;
         width: 100%;
+        padding: 0px 36px;
 
 
     }
@@ -58,7 +59,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      gap: 32px;  // Ajout de l'espacement entre les éléments
+      gap: 36px;  // Ajout de l'espacement entre les éléments
     }
   
     &--item {

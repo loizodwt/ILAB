@@ -106,11 +106,18 @@ window.addEventListener("resize", () => {
   wrapWidth = $items.length * (itemWidth + itemSpacing);  // Recalcule la largeur totale en fonction du redimensionnement
 });
 
+
 /*--------------------
 Render
 --------------------*/
+const autoScrollSpeed = 0.3;
+
 const render = () => {
   requestAnimationFrame(render);
+  
+  // Ajout de la vitesse de défilement automatique
+  scrollY -= autoScrollSpeed; // Défilement automatique à chaque frame
+
   y = lerp(y, scrollY, 0.1);
   dispose(y);
 
@@ -124,3 +131,5 @@ const render = () => {
   });
 };
 render();
+
+
