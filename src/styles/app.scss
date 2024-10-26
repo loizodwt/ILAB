@@ -3,6 +3,7 @@
 /*@import 'components/gradient';*/
 @import 'components/page1';
 @import 'components/bento';
+@import 'components/jeux';
 @import 'components/maps';
 @import 'components/keyframes';
 
@@ -21,6 +22,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  color:$c-text ;
 
 }
 
@@ -50,6 +52,7 @@ h3{
 h4{
   font-size: $size-h4;
   margin: 0;
+  line-height: 150%;
 }
 
 button{
@@ -58,6 +61,7 @@ button{
   font-family: 'ClashDisplay';
   border: none;
   background-color: transparent;
+  color: $c-text;
 }
 
 a{
@@ -66,6 +70,14 @@ a{
   margin: 0;
   font-family: 'ClashDisplay';
   text-decoration: none;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  opacity: 0;
+}
+path {
+  fill: $c-text;
 }
 
 

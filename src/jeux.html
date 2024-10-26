@@ -1,16 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+  <title>DWMA Project</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles/app.css">
+  <script src="scripts/app.js" defer></script>
 </head>
-<body>
+<body class="game">
+    <a class="game__close" href="bento.html">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/>
+        </svg>
+    </a>
+    <button class="game__next">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/>
+        </svg>
+    </button>
+    <div class="sections">
+        <section class="sections__section sections__section--rules">
+            <div class="sections__content">
+                <h2 class="sections__title">Règles</h2>
+                <h4 class="sections__text">
+                    Réalisez un parcours de dribble au pied ou à la main le plus vite possible puis refaite le un seconde fois avec les yeux bandés.
+                </h4>
+                <h4 class="sections__text">
+                    Lancez le chronomètre sur la borne avant chaque essai et enregistrez vos temps pour les comparer entre eux.
+                </h4>
+            </div>
+        </section>
+    
+        <section class="sections__section sections__section--chrono">
+            <div class="sections__content">
+                <h2 class="sections__title">Sans malus</h2>
+                <label class="sections__label">
+                    entrez votre nom :
+                    <input class="sections__input" type="text" id="Utilisateur" name="Nom" />
+                </label>
+                <p class="sections__timer">
+                    <span class="minutes">00</span>.<span class="seconds">00</span>.<span class="millis">000</span>
+                </p>
+                <div class="sections__buttons">
+                    <button class="sections__button sections__button--start" id="start">start</button>
+                    <button class="sections__button sections__button--stop" id="stop">stop</button>
+                    <button class="sections__button sections__button--reset" id="reset">reset</button>
+                </div>
 
-    <p>jeux</p>
+            </div>
+        </section>
+    
+        <section class="sections__section sections__section--malus">
+            <div class="sections__content">
+                <h2 class="sections__title">Avec malus</h2>
+                <p class="sections__timer malus">
+                    <span class="minutes">00</span>.<span class="seconds">00</span>.<span class="millis">000</span>
+                </p>
+                <div class="sections__buttons">
+                    <button class="sections__button sections__button--start" id="start">start</button>
+                    <button class="sections__button sections__button--stop" id="stop">stop</button>
+                    <button class="sections__button sections__button--reset" id="reset">reset</button>
+                </div>
+            </div>
+        </section>
+    
+        <section class="sections__section sections__section--result">
+            <div class="sections__content">
+                <h2 class="sections__title">Résultat</h2>
+                <h3 class="sections__subtitle"></h3>
+                <h4 class="sections__text"><span class="result-sans-malus"></span></h4>
+                <h4 class="sections__text"><span class="result-malus"></span></h4>
+                <h4 class="sections__text">Merci d'avoir participé</h4>
+            </div>
+        </section>
+        
+    </div>
     
 </body>
 </html>

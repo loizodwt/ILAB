@@ -1,0 +1,68 @@
+.sections {
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    width: 100vw;
+    &__section {
+        min-width: 100vw;
+        height: 100vh;
+        &--chrono{
+            .section__content{
+                max-width: 540px;
+            }
+        }
+    }
+    &__content{
+        display: flex;
+        flex-direction: column;
+        max-width: 900px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        justify-content: center;
+        gap: 36px;
+    }
+    &__title{
+        text-transform: uppercase;
+    }
+    &__label{
+        text-transform: uppercase;
+        font-size: $size-h4;
+        display: flex;
+        gap: 36px;
+    }
+    &__input{
+        border: none;
+        background-color: $c-bento-mauve;
+        height: fit-content;
+        border-radius: 15px;
+        height: 100%;
+        min-width: 200px;
+    }
+    &__timer{
+        font-size: $size-title;
+        font-weight: bold;
+        margin: 0;
+        width: 100px;
+    }
+    &__buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+
+
+
+.game__close {
+    position: fixed;
+    top: 64px;
+    left: 64px;
+    z-index: 10;
+}
+.game__next {
+    position: fixed;
+    bottom: 64px;
+    right: 64px;
+    z-index: 10;
+}
+
