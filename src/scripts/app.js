@@ -238,8 +238,8 @@ const autoScrollSpeed = 0.3;
 const render = () => {
   requestAnimationFrame(render);
   
-  // Ajout de la vitesse de défilement automatique
-  scrollY -= autoScrollSpeed; // Défilement automatique à chaque frame
+
+  scrollY -= autoScrollSpeed; 
 
   y = lerp(y, scrollY, 0.1);
   dispose(y);
@@ -256,20 +256,108 @@ const render = () => {
 render();
   }
 
-  function initMap() {
-    //initialtion
-      var map = L.map('map').setView([50.4674, 4.8719], 13);
-
-      //Layer
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          maxZoom: 20
-      }).addTo(map);
-
-      // marks
-  }
 });
 
 
 
+
+
+
+function initMap() {
+  var map = L.map('map').setView([50.4674, 4.8719], 13); 
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+    maxZoom: 20
+  }).addTo(map);
+
+
+
+
+  const clubs = [
+    { coords: [50.4674, 4.8719], id: 0, name: "Caracoles" },
+    { coords: [50.4650, 4.8667], id: 1, name: "Club Sportif Namur" },
+    { coords: [50.4634, 4.8705], id: 2, name: "Fitness Club Namur" }, 
+    { coords: [50.4690, 4.8765], id: 3, name: "Multisports Namur" }, 
+  ];
+
+
+  const customIcon = L.divIcon({
+    className: 'custom-icon', 
+    html: '<div class="icon-content"></div>',
+  });
+
+
+  const markers = clubs.map(club => {
+    const marker = L.marker(club.coords, { icon: customIcon }).addTo(map);
+    marker.bindPopup(`<b>${club.name}</b>`);
+    return marker;
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const allDetails = document.querySelectorAll('.maps__club-details');
+  const allToggles = document.querySelectorAll('.maps__club-toggle');
+
+  function closeAllDetails() {
+    allDetails.forEach(detail => {
+      detail.classList.remove('open');
+    });
+    allToggles.forEach(toggle => {
+      toggle.textContent = "+"; 
+    });
+  }
+
+  clubs.forEach(club => {
+    const marker = L.marker(club.coords).addTo(map);
+    marker.bindPopup(`<b>${club.name}</b>`);
+
+    marker.on('click', function () {
+      const targetClub = document.querySelectorAll('.maps__club')[club.id];
+      const details = targetClub.querySelector('.maps__club-details');
+      const toggle = targetClub.querySelector('.maps__club-toggle');
+
+      closeAllDetails();
+      details.classList.add('open');
+      toggle.textContent = "-"; 
+
+      targetClub.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  });
+
+  allToggles.forEach(toggle => {
+    toggle.addEventListener('click', function () {
+      const targetClub = this.closest('.maps__club');
+      const details = targetClub.querySelector('.maps__club-details');
+
+      if (!details.classList.contains('open')) {
+        closeAllDetails();
+        details.classList.add('open');
+        this.textContent = "-";
+      } else {
+        details.classList.remove('open');
+        this.textContent = "+";
+      }
+    });
+  });
+}
+
+
+
+  
 

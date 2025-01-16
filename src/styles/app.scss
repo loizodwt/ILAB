@@ -11,6 +11,9 @@
 
 
 
+html {
+  scroll-behavior: smooth;
+}
 
 
 
@@ -35,21 +38,21 @@
 
 
 :root {
-    --rose: #D60081;
-    --bleu: #267797; 
-    --bg: #ffffff; 
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
+  --rose: #D60081;
+  --bleu: #267797;
+  --bg: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   font-family: 'ClashDisplay';
   margin: 0;
   padding: 0;
   overflow: hidden;
-  color:$c-text ;
+  color: $c-text ;
 
 }
 
@@ -58,31 +61,31 @@ section {
   display: flex;
 }
 
-h1{
+h1 {
   font-size: $size-title;
   text-transform: uppercase;
   margin: 0;
 
 }
 
-h2{
+h2 {
   font-size: $size-h2;
   margin: 0;
 }
 
-h3{
+h3 {
   font-size: $size-h3;
   margin: 0;
   text-transform: uppercase;
 }
 
-h4{
+h4 {
   font-size: $size-h4;
   margin: 0;
   line-height: 150%;
 }
 
-button{
+button {
   font-size: $size-h4;
   font-weight: bolder;
   font-family: 'ClashDisplay';
@@ -91,7 +94,7 @@ button{
   color: $c-text;
 }
 
-a{
+a {
   color: $c-text;
   font-size: $size-h4;
   margin: 0;
@@ -103,9 +106,7 @@ a{
 *::-webkit-scrollbar {
   opacity: 0;
 }
+
 path {
   fill: $c-text;
 }
-
-
-

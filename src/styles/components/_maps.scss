@@ -1,20 +1,23 @@
-.maps{
+.maps {
     display: flex;
     padding: 64px;
     gap: 32px;
-    &__header{
+
+    &__header {
         display: flex;
         flex-direction: column;
-        gap: 32px;
         max-width: 40%;
     }
-    &__nav{
+
+    &__nav {
         display: flex;
-        &-item{
+
+        &-item {
             background-color: $c-bento-rose;
             border-radius: 35px;
         }
-        &-link{
+
+        &-link {
             border: none;
             display: flex;
             height: 100%;
@@ -22,38 +25,86 @@
             width: 100%;
             align-items: center;
         }
-        
     }
-    &__title{
+
+    &__title {
         background-color: $c-bento-fushia;
         border-radius: 35px;
         display: flex;
         flex-direction: column;
         padding: 32px;
         gap: 20px;
-        &-sub{
+
+        &-sub {
             text-transform: uppercase;
             font-weight: 400;
         }
     }
-    &__club{
-        //overflow-y: scroll;
-        &-info{
-            display: flex;
-            border-radius: 35px;
-            padding: 32px;
-            justify-content: space-between;
-            background-color: chartreuse;
+
+    &__card {
+        display: flex;
+        align-items: center;
+    }
+
+    &__club {
+        padding: 1rem;
+        border-radius: 35px;
+
+        &:nth-of-type(1) {
+            background-color: $c-bento-rose;
         }
-        &-name{
+
+        &:nth-of-type(2) {
+            background-color: $c-bento-fushia;
+        }
+
+        &:nth-of-type(3),
+        &:nth-of-type(4) {
+            background-color: $c-bento-mauve;
+        }
+
+        &-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &-name {
             font-weight: bold;
         }
-        &-location{
+
+        &-location {
+            margin-left: auto;
             text-transform: uppercase;
             font-weight: 400;
         }
+
+        &-toggle {
+            margin-left: auto;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        &-details {
+            display: none;
+            padding-top: 1rem;
+            font-size: 1rem;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+        }
+
+        &-details.open {
+            display: block;
+            max-height: 200px;
+            opacity: 1;
+            transition: max-height 0.5s ease-in, opacity 0.5s ease-in;
+        }
     }
-    &__plan{
+
+    &__plan {
         border: solid 4px white;
         overflow: hidden;
         border-radius: 35px;
@@ -61,13 +112,60 @@
     }
 }
 
-.maps__plan{
-
+.maps__plan {
     width: 100%;
     height: 100%;
     border-radius: 35px;
+
     .leaflet-control-attribution {
         display: none;
     }
-    
+}
+
+.maps__club-details {
+    display: none;
+    transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.maps__club-details.open {
+    display: block;
+}
+
+.maps__container {
+    margin-top: 5vh;
+}
+
+
+
+
+
+.custom-icon .icon-content {
+    width: 40px;
+    height: 40px;
+    background-color: $c-bento-fushia;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+
+}
+
+.custom-icon:hover .icon-content {
+    transform: scale(1.2);
+}
+
+
+
+
+
+
+
+.leaflet-marker-pane img,
+.leaflet-shadow-pane img {
+    display: none !important;
 }
