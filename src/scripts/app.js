@@ -88,44 +88,61 @@ const sections = {
   avecMalus: document.querySelector(".sections__section--malus"),
 };
 
-sections.sansMalus.querySelector(".sections__button--start").addEventListener('click', () => start('sansMalus'));
-sections.sansMalus.querySelector(".sections__button--stop").addEventListener('click', stop);
-sections.sansMalus.querySelector(".sections__button--reset").addEventListener('click', () => reset('sansMalus'));
 
-sections.avecMalus.querySelector(".sections__button--start").addEventListener('click', () => start('avecMalus'));
-sections.avecMalus.querySelector(".sections__button--stop").addEventListener('click', stop);
-sections.avecMalus.querySelector(".sections__button--reset").addEventListener('click', () => reset('avecMalus'));
 
-// Gérer le défilement des sections
+
+
+// Gestion des boutons "start", "stop", et "reset"
+function setupButtonListeners(sectionKey) {
+  const section = sections[sectionKey];
+  section.querySelector(".sections__button--start").addEventListener("click", () => start(sectionKey));
+  section.querySelector(".sections__button--stop").addEventListener("click", stop);
+  section.querySelector(".sections__button--reset").addEventListener("click", () => reset(sectionKey));
+}
+
+setupButtonListeners("sansMalus");
+setupButtonListeners("avecMalus");
+
+// Gestion du défilement des sections
 const allSections = document.querySelectorAll(".sections__section");
 let currentIndex = 0;
+
+function scrollToSection(index) {
+  allSections[index].scrollIntoView({ behavior: "smooth" });
+}
+
+function updateNextButtonVisibility() {
+  const nextButton = document.querySelector(".game__next");
+  nextButton.style.display = (currentIndex === allSections.length - 1) ? "none" : "block";
+}
 
 document.querySelector(".game__next").addEventListener("click", () => {
   const currentSection = allSections[currentIndex];
   const inputField = currentSection.querySelector(".sections__input");
 
+  // Validation : Vérifie si le champ requis est rempli
   if (inputField && inputField.value.trim() === "") {
-      alert("Veuillez remplir le champ requis avant de continuer.");
-      return;
+    alert("Veuillez remplir le champ requis avant de continuer.");
+    return;
   }
 
+  // Passage à la section suivante
   currentIndex = (currentIndex + 1) % allSections.length;
 
   if (currentIndex === allSections.length - 1) {
-      const nameInput = document.querySelector(".sections__input").value;
-      const resultTitle = document.querySelector(".sections__section--result h3");
-      resultTitle.textContent = `Voici ton temps, ${nameInput}`;
+    // Mise à jour des résultats
+    const nameInput = document.querySelector(".sections__input").value || "Invité";
+    const resultTitle = document.querySelector(".sections__section--result h3");
+    resultTitle.textContent = `Voici ton temps, ${nameInput}`;
 
-      const resultMalus = document.querySelector(".sections__section--result h4:nth-of-type(2)");
-      const resultSansMalus = document.querySelector(".sections__section--result h4:nth-of-type(1)");
-      
-      resultMalus.textContent = `Avec malus : ${formatTime(chrono.avecMalus)}`;
-      resultSansMalus.textContent = `Sans malus : ${formatTime(chrono.sansMalus)}`;
+    const resultMalus = document.querySelector(".sections__section--result h4:nth-of-type(2)");
+    const resultSansMalus = document.querySelector(".sections__section--result h4:nth-of-type(1)");
+    resultMalus.textContent = `Avec malus : ${formatTime(chrono.avecMalus)}`;
+    resultSansMalus.textContent = `Sans malus : ${formatTime(chrono.sansMalus)}`;
   }
 
-  allSections[currentIndex].scrollIntoView({ behavior: "smooth" });
-
-  document.querySelector(".game__next").style.display = (currentIndex === allSections.length - 1) ? "none" : "block";
+  scrollToSection(currentIndex);
+  updateNextButtonVisibility();
 });
 
 // Fonction pour formater le temps pour l'affichage
@@ -133,12 +150,30 @@ function formatTime(time) {
   const millis = time % 1000;
   const seconds = Math.floor(time / 1000) % 60;
   const minutes = Math.floor(time / 60000);
-  return `${("0" + minutes).slice(-2)}:${("00" + seconds).slice(-2)}.${("000" + millis).slice(-3)}`;
+  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}.${String(millis).padStart(3, "0")}`;
 }
+
+// Initialisation : Met à jour l'état initial
+scrollToSection(currentIndex);
+updateNextButtonVisibility();
+
 
 
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+  
   function initBento() {
     //Vars
     const $menu = document.querySelector(".menu");
