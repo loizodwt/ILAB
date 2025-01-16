@@ -3,16 +3,19 @@
     overflow-x: hidden;
     scroll-behavior: smooth;
     width: 100vw;
+
     &__section {
         min-width: 100vw;
         height: 100vh;
-        &--chrono{
-            .section__content{
+
+        &--chrono {
+            .section__content {
                 max-width: 540px;
             }
         }
     }
-    &__content{
+
+    &__content {
         display: flex;
         flex-direction: column;
         max-width: 900px;
@@ -21,37 +24,92 @@
         justify-content: center;
         gap: 36px;
     }
-    &__title{
+
+    &__title {
         text-transform: uppercase;
     }
-    &__label{
+
+    &__label {
         text-transform: uppercase;
         font-size: $size-h4;
         display: flex;
         gap: 36px;
     }
-    &__input{
+
+    &__input {
         border: none;
         background-color: $c-bento-mauve;
         height: fit-content;
         border-radius: 15px;
         height: 100%;
-        min-width: 200px;
+        width: 50vh;
     }
-    &__timer{
+
+    &__timer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         font-size: $size-title;
         font-weight: bold;
         margin: 0;
-        width: 100px;
+        width: 100%;
+
+        .icon-before,
+        .icon-after {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .icon-before {
+            transform: rotate(180deg);
+            background-image: url(../../assets/images/icones/semi-croix.svg);
+            margin-right: 30px;
+        }
+
+        .icon-after {
+            background-image: url(../../assets/images/icones/semi-croix.svg);
+            margin-left: 30px;
+        }
+
+
+        .minutes,
+        .seconds,
+        .millis {
+            display: inline-block;
+            text-align: center;
+            width: 2ch;
+        }
+
+        .millis {
+            width: 3ch;
+        }
+
+
     }
-    &__buttons{
+
+    &__buttons {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
+
     }
+
+
+
+    .sections__button {
+        text-transform: uppercase;
+        background-color: $c-bento-fushia;
+        padding: 4vh 8vh;
+        border-radius: 15px;
+        font-weight: 500;
+
+
+    }
+
 }
-
-
 
 .game__close {
     position: fixed;
@@ -59,10 +117,10 @@
     left: 64px;
     z-index: 10;
 }
+
 .game__next {
     position: fixed;
     bottom: 64px;
     right: 64px;
     z-index: 10;
 }
-

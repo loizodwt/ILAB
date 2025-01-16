@@ -1,70 +1,93 @@
-
-.section1{
+.section1 {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    height: 100vh;
 
-    .title{
+    background-image: url(../../assets/images/bg-index.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
+
+
+    .title {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
-    .button--next{
+    .button--next {
         font-weight: 300;
         text-transform: uppercase;
         animation: fade 3s infinite;
         animation-timing-function: ease-in-out;
     }
- 
+
 }
 
 
 
 
-.section2{
+.section2 {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 5vh;
 
-    &__title{
+    height: 100vh;
+    background-image: url(../../assets/images/bg-intro.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
+
+    &__title {
         text-transform: uppercase;
     }
 
 
-    &__el:first-child{
+    &__el:first-child {
         display: flex;
         flex-direction: column;
         padding: 0 30%;
-        gap: 20px;
-    }
-    &__el:last-child{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
+        gap: 5vh;
     }
 
-    &__text{
+    &__el:last-child {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    &__text {
         font-weight: 300;
-        &:first-child{
+
+        &:first-child {
             transform: translateX(-54px);
         }
-        &:last-child{
+
+        &:last-child {
             transform: translateX(54px);
         }
     }
-    &__link{
+
+    &__link {
         padding: 28px 38px;
         border-radius: 15px;
         font-weight: 500;
         text-transform: uppercase;
-        &:nth-child(1){
+
+        &:nth-child(1) {
             background-color: $c-bento-mauve;
-        }&:nth-child(2){
+        }
+
+        &:nth-child(2) {
             background-color: $c-bento-fushia;
         }
     }
 
-    
+
+
 }
